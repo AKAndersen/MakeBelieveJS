@@ -1,17 +1,32 @@
+Array.prototype.querySelectorAll = document.querySelectorAll;
 
 class __ {
     constructor(query) {
         this.query = query;
-        var items = document.querySelectorAll(this.query);
-        return items
+        this.items = document.querySelectorAll(this.query);
     }
 
+    
     //we need to return 'this' in every method in order to make them chainable, 
     //in some methods we probably want to return a list of instance references instead
 
     //4. Get a list of all parents of the (2) CSS selector, if there are no parents, return empty.
     parent() {
-        //return this;
+        var parents = [];
+        for (var i=0;i<this.items.length;i++){
+            parents.push(this.items[i].parentNode);
+        };
+        if (arguments[0]){
+            //empty the previously filled list
+            parents = []
+            for (var i=0;i<this.items.length;i++){
+                if (this.items[i].parentNode.matches(arguments[0])){
+                    parents.push(this.items[i].parentNode);
+                }
+            };
+        }
+        console.log(parents)
+        return parents;
     }
 
     // 5. Get a list of all grandParents of the (2) CSS selector, if there are no grandparents, return empty.
@@ -64,9 +79,9 @@ class __ {
         //return this;
     }
 
-
 }
 
 
-var test = new __('#test input');
+
+var test = new __('#password').parent('form');
 

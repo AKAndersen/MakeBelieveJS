@@ -22,8 +22,8 @@ class __ {
                 }
             };
         }
-        this.items = parents // <--- er ekki viss en held þetta þurfi vera svona til að vera chainable
-        return this.items;
+        this.items = parents 
+        return this.items; // <---- svona returnar það réttu value, en er ekki chainable :/ 
     }
 
     // 5. Get a list of all grandParents of the (2) CSS selector, if there are no grandparents, return empty.

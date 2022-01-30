@@ -1,9 +1,11 @@
+
 class __ {
     constructor(query) {
         this.query = query;
+        var items = document.querySelectorAll(this.query);
 
+        return items
     }
-
 
     //we need to return 'this' in every method in order to make them chainable, 
     //in some methods we probably want to return a list of instance references instead
@@ -63,7 +65,5 @@ class __ {
 }
 
 
+var test = new __('#test input');
 
-var ut = new __('t');
-
-ut.test().test2();

@@ -7,9 +7,6 @@ class __ {
     }
 
     
-    //we need to return 'this' in every method in order to make them chainable, 
-    //in some methods we probably want to return a list of instance references instead
-
     //4. Get a list of all parents of the (2) CSS selector, if there are no parents, return empty.
     parent() {
         var parents = [];
@@ -25,8 +22,8 @@ class __ {
                 }
             };
         }
-        console.log(parents)
-        return parents;
+        this.items = parents // <--- er ekki viss en held þetta þurfi vera svona til að vera chainable
+        return this.items;
     }
 
     // 5. Get a list of all grandParents of the (2) CSS selector, if there are no grandparents, return empty.
@@ -43,8 +40,11 @@ class __ {
         //return this;
     }
 
-    insertText() {
-        //return this;
+    insertText(text) {
+        for (var i=0;i<this.items.length;i++){
+            this.items[i].textContent = text;
+        }
+        return this;
     }
 
     append() {
@@ -83,5 +83,5 @@ class __ {
 
 
 
-var test = new __('#password').parent('form');
+var test = new __('#password').parent().insertText("tttttt")
 

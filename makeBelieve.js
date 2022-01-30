@@ -3,7 +3,6 @@ class __ {
     constructor(query) {
         this.query = query;
         var items = document.querySelectorAll(this.query);
-
         return items
     }
 

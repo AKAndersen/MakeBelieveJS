@@ -4,9 +4,9 @@ class __ {
     constructor(query) {
         this.query = query;
         this.items = document.querySelectorAll(this.query);
+        
     }
 
-    
     //4. Get a list of all parents of the (2) CSS selector, if there are no parents, return empty.
     parent() {
         var parents = [];
@@ -28,7 +28,7 @@ class __ {
 
     // 5. Get a list of all grandParents of the (2) CSS selector, if there are no grandparents, return empty.
     grandParent() {
-        //return this;
+
     }
 
     // 6. Get a list of all ancestors of the (2) CSS Selector, if there are no ancestors, return empty.
@@ -37,7 +37,11 @@ class __ {
     }
 
     onClick() {
-        //return this;
+        for (var i=0;i<this.items.length;i++){
+            __(i).onClick(function(evt){
+                console.log(evt.target.value)
+            })
+        }
     }
 
     insertText(text) {
@@ -47,7 +51,7 @@ class __ {
         return this;
     }
 
-    append() {
+    append(elem) {
         //return this;
     }
 
@@ -63,20 +67,32 @@ class __ {
         //return this;
     }
 
-    css() {
-        //return this;
+    css(elem, value) {
+        for (var i=0;i<this.items.length;i++){
+            __(i).css(elem, value)
+        }
     }
 
-    toggleClass() {
-        //return this;
+    toggleClass(elem) {
+        for(var i=0;i.this.items.length;i++){
+            __(i).toggleClass(elem)
+        }
     }
 
     onSubmit() {
-        //return this;
+        for (var i=0;i<this.items.length;i++){
+            __(i).onSubmit(function(evt){
+                console.log(evt.target.value)
+            })
+        }
     }
 
     onInput() {
-        //return this;
+        for (var i=0;i<this.items.length;i++){
+            __(i).onInput(function(evt){
+                console.log(evt.target.value)
+            })
+        }
     }
 
 }

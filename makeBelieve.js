@@ -1,12 +1,11 @@
-Array.prototype.querySelectorAll = document.querySelectorAll;
 
 class __ {
     constructor(query) {
         this.query = query;
         // 2. Implement a query selector.
         this.items = document.querySelectorAll(this.query);
-        this.forms = document.getElementById("#form");
-        this.inputs = document.getElementById("#input")
+        //this.forms = document.getElementById("#form"); <-- Þetta ætti að vera óþarfi held ég, queryselectorAll() getur tekið inn hvaða query sem er. 
+        //this.inputs = document.getElementById("#input")
         
     }
 

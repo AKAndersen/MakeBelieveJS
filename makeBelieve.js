@@ -60,21 +60,32 @@ class __ {
     // 9. Implement a method which allows you to apend new HTML to an element. String as parameter or an actual DOM element.
     append(elem) {
         //return this;
+        var apend = [];
+        for (var i=0;i<this.items.length;i++){
+            apend.push(this.items, elem);
+        };
     }
 
     //10. Implement a method which allows you to prepend new HTML to an element. Similar to (9.), inserts before rather than after.
-    prepend() {
-        //return this;
+    prepend(elem) {
+        var prepend = []
+        for (var i=0;i<this.items.length;i++){
+            prepend.insertBefore(this.items, elem);
+        };
     }
 
     // 11. Implement a method which deletes an element.
     delete() {
-        //return this;
+        var deletion = []
+        for (var i=0;i<this.items.length;i++){
+            deletion.remove(this.items[i]);
+        };
     }
 
     // 12. Implement a method which imitates the JQuery ajax method. Parameter is an object which contains the configuration for the HTTP request
-    ajax(URL, Method, Timeout, Data, HTTP_headers, Success_callback, Failed_callback, Before_send_callback) {
+    ajax(URL, Method, Timeout, Data, headers) {
         //return this;
+        
     }
 
     // 13. Implements a method called css(), changes the css styles on the element.

@@ -40,7 +40,7 @@ class __ {
             //empty the previously filled list
             grandparents = []
             for (var i=0;i<this.items.length;i++){
-                if (this.items[i].parentNode.matches(arguments[0])){
+                if (this.items[i].parentNode.parentNode.matches(arguments[0])){
                     grandparents.push(this.items[i].parentNode.parentNode);
                 }
             };

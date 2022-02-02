@@ -25,11 +25,28 @@ class __ {
         }
         this.items = parents 
         return this.items; // <---- svona returnar það réttu value, en er ekki chainable :/ 
-    }
+    };
+    
+    
 
     // 5. Get a list of all grandParents of the (2.) CSS selector, if there are no grandparents, return empty.
     grandParent() {
-
+        var grandparents = [];
+        for (var i=0;i<this.items.length;i++){
+            grandparents.push(this.items[i].parentNode.parentNode);
+        };
+        if (arguments[0]){
+            //empty the previously filled list
+            grandparents = []
+            for (var i=0;i<this.items.length;i++){
+                if (this.items[i].parentNode.parentNode.matches(arguments[0])){
+                    grandparents.push(this.items[i].parentNode.parentNode);
+                }
+            };
+        }
+        console.log(grandparents)
+        this.items = grandparents 
+        return this.items;
     }
 
     // 6. Get a list of all ancestors of the (2.) CSS Selector, if there are no ancestors, return empty.
@@ -94,4 +111,6 @@ class __ {
 
 }
 
+
+var test = new __('#password').grandParent();
 

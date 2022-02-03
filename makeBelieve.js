@@ -24,6 +24,7 @@ class __ {
             };
         }
         this.items = parents 
+        console.log(this.items)
         return this.items; // <---- svona returnar það réttu value, en er ekki chainable :/ 
     };
     
@@ -51,7 +52,41 @@ class __ {
 
     // 6. Get a list of all ancestors of the (2.) CSS Selector, if there are no ancestors, return empty.
     ancestor() {
-        //return this;
+        var ancestors = [];
+        for (var i=0;i<this.items.length;i++){
+            var current_element = this.items[i].parentNode.parentNode;
+            while(true){
+                if (current_element.parentNode == null || current_element.parentNode.toString() == "[object HTMLDocument]"){
+                    break
+                }
+                else{
+                    current_element = current_element.parentNode;
+                    ancestors.push(current_element);
+                }
+                
+            }
+        }
+        
+        if (arguments[0]){
+            ancestors = [];
+            for (var i=0;i<this.items.length;i++){
+                var current_element = this.items[i].parentNode.parentNode;
+                while(true){
+                    if (current_element.parentNode == null || current_element.parentNode.toString() == "[object HTMLDocument]"){
+                        break
+                    }
+                    else{
+                        current_element = current_element.parentNode;
+                        if (current_element.matches(arguments[0])){
+                            ancestors.push(current_element);
+                        }
+                    }
+                }
+            }
+        }
+        console.log(ancestors);
+        this.items = ancestors;
+        return this.items
     }
 
     // 7. Implement a click handler. The fallback should have access to the event and should refere to it self.
@@ -113,8 +148,10 @@ class __ {
 
 }
 
+var test = new __('#password').ancestor(".root");
 
-var test = new __('button').onClick(function(){
+
+/*var test = new __('button').onClick(function(){
     console.log(this)
-});
+});*/
 

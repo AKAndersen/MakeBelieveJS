@@ -1,60 +1,62 @@
+__ = (query) => {
+    this.query = query;
+    return new makeBelieve(document.querySelectorAll(this.query)) 
+}
 
-
-class __ {
-    constructor(query) {
-        this.query = query;
+class makeBelieve {
+    constructor(makeBelieveObject) {
         // 2. Implement a query selector.
-        this.items = document.querySelectorAll(this.query);    
+        this.makeBelieveObject = makeBelieveObject;    
     }
     
 
     //4. Get a list of all parents of the (2) CSS selector, if there are no parents, return empty.
     parent() {
         var parents = [];
-        for (var i=0;i<this.items.length;i++){
-            parents.push(this.items[i].parentNode);
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            parents.push(this.makeBelieveObject[i].parentNode);
         };
         if (arguments[0]){
             //empty the previously filled list
             parents = []
-            for (var i=0;i<this.items.length;i++){
-                if (this.items[i].parentNode.matches(arguments[0])){
-                    parents.push(this.items[i].parentNode);
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                if (this.makeBelieveObject[i].parentNode.matches(arguments[0])){
+                    parents.push(this.makeBelieveObject[i].parentNode);
                 }
             };
         }
-        this.items = parents 
-        console.log(this.items)
-        return this.items; // <---- svona returnar það réttu value, en er ekki chainable :/ 
+        this.makeBelieveObject = parents 
+        console.log(this.makeBelieveObject)
+        return this; // <---- svona returnar það réttu value, en er ekki chainable :/ 
     };
     
     
-
+    
     // 5. Get a list of all grandParents of the (2.) CSS selector, if there are no grandparents, return empty.
     grandParent() {
         var grandparents = [];
-        for (var i=0;i<this.items.length;i++){
-            grandparents.push(this.items[i].parentNode.parentNode);
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            grandparents.push(this.makeBelieveObject[i].parentNode.parentNode);
         };
         if (arguments[0]){
             //empty the previously filled list
             grandparents = []
-            for (var i=0;i<this.items.length;i++){
-                if (this.items[i].parentNode.parentNode.matches(arguments[0])){
-                    grandparents.push(this.items[i].parentNode.parentNode);
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                if (this.makeBelieveObject[i].parentNode.parentNode.matches(arguments[0])){
+                    grandparents.push(this.makeBelieveObject[i].parentNode.parentNode);
                 }
             };
         }
         console.log(grandparents)
-        this.items = grandparents 
-        return this.items;
+        this.makeBelieveObject = grandparents 
+        return this;
     }
 
     // 6. Get a list of all ancestors of the (2.) CSS Selector, if there are no ancestors, return empty.
     ancestor() {
         var ancestors = [];
-        for (var i=0;i<this.items.length;i++){
-            var current_element = this.items[i].parentNode.parentNode;
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            var current_element = this.makeBelieveObject[i].parentNode.parentNode;
             while(true){
                 if (current_element.parentNode == null || current_element.parentNode.toString() == "[object HTMLDocument]"){
                     break
@@ -69,8 +71,8 @@ class __ {
         
         if (arguments[0]){
             ancestors = [];
-            for (var i=0;i<this.items.length;i++){
-                var current_element = this.items[i].parentNode.parentNode;
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                var current_element = this.makeBelieveObject[i].parentNode.parentNode;
                 while(true){
                     if (current_element.parentNode == null || current_element.parentNode.toString() == "[object HTMLDocument]"){
                         break
@@ -84,14 +86,15 @@ class __ {
                 }
             }
         }
-        this.items = ancestors;
-        return this.items
+        this.makeBelieveObject = ancestors;
+        console.log(this)
+        return this
     }
 
     // 7. Implement a click handler. The fallback should have access to the event and should refere to it self.
     onClick(callback){
-        for (var i = 0; i < this.items.length; i++) {
-            this.items[i].onclick = function(){callback.apply(this, callback.arguments)}
+        for (var i = 0; i < this.makeBelieveObject.length; i++) {
+            this.makeBelieveObject[i].onclick = function(){callback.apply(this, callback.arguments)}
         }
         return this;
     }
@@ -99,8 +102,8 @@ class __ {
     
     // 8. Inmplement a method which allows you to insert text to element. Previous text should be overwritten.
     insertText(text) {
-        for (var i=0;i<this.items.length;i++){
-            this.items[i].textContent = text;
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            this.makeBelieveObject[i].textContent = text;
         }
         return this;
     }
@@ -147,7 +150,7 @@ class __ {
 
 }
 
-var test = new __('#password').ancestor(".root");
+var test = __('#password').ancestor('.root');
 
 
 /*var test = new __('button').onClick(function(){

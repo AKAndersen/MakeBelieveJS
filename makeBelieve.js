@@ -65,8 +65,11 @@ class __ {
      
     
     // 8. Inmplement a method which allows you to insert text to element. Previous text should be overwritten.
-    insertText() {
-
+    insertText(text) {
+        for (var i=0;i<this.items.length;i++){
+            this.items[i].textContent = text;
+        }
+        return this;
     }
 
     // 9. Implement a method which allows you to apend new HTML to an element. String as parameter or an actual DOM element.

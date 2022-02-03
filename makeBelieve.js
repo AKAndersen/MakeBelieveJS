@@ -55,12 +55,11 @@ class __ {
     }
 
     // 7. Implement a click handler. The fallback should have access to the event and should refere to it self.
-    onClick(){
+    onClick(callback){
         for (var i = 0; i < this.items.length; i++) {
-            this.items[i].addEventListener('click', function(){
-                console.log("yesbi")
-            });
+            this.items[i].onclick = function(){callback.apply(this, callback.arguments)}
         }
+        return this;
     }
      
     
@@ -115,5 +114,7 @@ class __ {
 }
 
 
-var test = new __('#password').grandParent();
+var test = new __('button').onClick(function(){
+    console.log(this)
+});
 

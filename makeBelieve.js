@@ -116,12 +116,10 @@ class makeBelieve {
             }
         }
         else{
-            //virkar ekki allveg rétt
+            //virkar ekki rétt
             var element = arguments[0].parentNode 
-            console.log(this.makeBelieveObject)
             for (var i=0;i<this.makeBelieveObject.length;i++){
-                console.log(i)
-                this.makeBelieveObject[i].append(element)
+                this.makeBelieveObject[i].insertAdjacentElement('beforeend',element)
             }
         }
 
@@ -129,13 +127,28 @@ class makeBelieve {
     }
 
     //10. Implement a method which allows you to prepend new HTML to an element. Similar to (9.), inserts before rather than after.
-    prepend(elem) {
- 
+    prepend() {
+        if (typeof(arguments[0]) == 'string'){
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                this.makeBelieveObject[i].insertAdjacentHTML('afterbegin',arguments[0]);
+            }
+        }
+        else{
+            //virkar ekki allveg rétt
+            var element = arguments[0].parentNode 
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                this.makeBelieveObject[i].insertAdjacentElement('afterbegin',element)
+            }
+        }
+        return this
     }
 
     // 11. Implement a method which deletes an element.
     delete() {
-
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            this.makeBelieveObject[i].remove();
+        }
+        return this
     }
 
     // 12. Implement a method which imitates the JQuery ajax method. Parameter is an object which contains the configuration for the HTTP request
@@ -169,16 +182,27 @@ class makeBelieve {
 //parent
 //__('#password').parent().parent();
 
-
-//var test = __('form').append('<p>I am an appened paragraph</p>');
-var test = __('form').append(
-    document.createElement('p').appendChild(
-        document.createTextNode('I am an appended paragraph.')
-    )
-)
-
-
+//button
 /*var test = new __('button').onClick(function(){
     console.log(this)
 });*/
+
+//append
+//var test = __('form').append('<p>I am an appened paragraph</p>');
+/*var test = __('form').append(
+    document.createElement('p').appendChild(
+        document.createTextNode('I am an appended paragraph.')
+    )
+)*/
+
+//prepend
+//var test = __('form').prepend('<p>I am an prepended paragraph</p>')
+/*var test = __('form').append(
+    document.createElement('p').appendChild(
+        document.createTextNode('I am an prepended paragraph.')
+    ))*/
+
+//delete
+//__('#button').delete();
+
 

@@ -25,8 +25,8 @@ class makeBelieve {
                 }
             };
         }
-        this.makeBelieveObject = parents 
-        console.log(this.makeBelieveObject)
+        this.makeBelieveObject = parents
+        console.log(this) 
         return this; 
     };
     
@@ -110,8 +110,22 @@ class makeBelieve {
 
     // 9. Implement a method which allows you to apend new HTML to an element. String as parameter or an actual DOM element.
     append() {
-        //return this;
+        if (typeof(arguments[0]) == 'string'){
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                this.makeBelieveObject[i].insertAdjacentHTML('beforeend',arguments[0]);
+            }
+        }
+        else{
+            //virkar ekki allveg rétt
+            var element = arguments[0].parentNode 
+            console.log(this.makeBelieveObject)
+            for (var i=0;i<this.makeBelieveObject.length;i++){
+                console.log(i)
+                this.makeBelieveObject[i].append(element)
+            }
+        }
 
+        return this
     }
 
     //10. Implement a method which allows you to prepend new HTML to an element. Similar to (9.), inserts before rather than after.
@@ -150,7 +164,18 @@ class makeBelieve {
 
 }
 
-var test = __('#password').ancestor('.root');
+//tests
+
+//parent
+//__('#password').parent().parent();
+
+
+//var test = __('form').append('<p>I am an appened paragraph</p>');
+var test = __('form').append(
+    document.createElement('p').appendChild(
+        document.createTextNode('I am an appended paragraph.')
+    )
+)
 
 
 /*var test = new __('button').onClick(function(){

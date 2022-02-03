@@ -27,7 +27,7 @@ class makeBelieve {
         }
         this.makeBelieveObject = parents 
         console.log(this.makeBelieveObject)
-        return this; // <---- svona returnar það réttu value, en er ekki chainable :/ 
+        return this; 
     };
     
     

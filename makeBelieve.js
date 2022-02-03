@@ -84,7 +84,6 @@ class __ {
                 }
             }
         }
-        console.log(ancestors);
         this.items = ancestors;
         return this.items
     }
@@ -148,7 +147,7 @@ class __ {
 
 }
 
-var test = new __('#password').ancestor(".root");
+var test = new __('#password').ancestor(".ancestor");
 
 
 /*var test = new __('button').onClick(function(){

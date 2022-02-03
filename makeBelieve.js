@@ -147,7 +147,7 @@ class __ {
 
 }
 
-var test = new __('#password').ancestor(".ancestor");
+var test = new __('#password').ancestor(".root");
 
 
 /*var test = new __('button').onClick(function(){

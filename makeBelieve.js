@@ -231,7 +231,10 @@ class makeBelieve {
     }
 
     // 13. Implements a method called css(), changes the css styles on the element.
-    css(elem, value) {
+    css(property, value) {
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            this.makeBelieveObject[i].style[property] = value;
+        }
 
     }
     // 14. toggles css clas for an element
@@ -279,7 +282,6 @@ var test = __('button').prepend(pElem)*/
 
 //ajax
 
-
 /*__().ajax({
     url:'https://serene-island-81305.herokuapp.com/api/400',
     method: 'GET',
@@ -294,13 +296,12 @@ var test = __('button').prepend(pElem)*/
         console.log("fail\n")
         console.log(error);
     }
-})*/
-
-
+})
 __().ajax({
-    url:'https://serene-island-81305.herokuapp.com/api/200',
+    url:'https://serene-island-81305.herokuapp.com/api/201',
     method: 'POST',
-    data: {'123':'abc'},
+    data: {'123':'abc',
+            'rrr':null},
     headers: {'Access-Control-Allow-Origin':'https://serene-island-81305.herokuapp.com/api/2300'},
     success: function(resp){
         console.log(resp.responseText)
@@ -313,5 +314,7 @@ __().ajax({
         console.log("fail")
         console.log(error);
     }
-})
+})*/
 
+//css
+__('button').css('color','red');

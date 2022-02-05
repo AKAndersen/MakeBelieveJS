@@ -189,26 +189,40 @@ class makeBelieve {
 
         xhttp.ontimeout = ajaxObject.fail;
         xhttp.onload = function() {
-            if (xhttp.readyState === 4) {
-                if (xhttp.status === 200) {
-                    if (ajaxObject.success != null){
-                        ajaxObject.success(xhttp);
-                    }
-                } else {
-                    if (ajaxObject.fail != null){
-                        ajaxObject.fail.apply(xhttp,ajaxObject.fail.args);
+            try{
+                if (xhttp.readyState === 4) {
+                    if (xhttp.status.toString()[0] == '2') {
+                        if (ajaxObject.success != null){
+                            ajaxObject.success(xhttp);
+                        }
+                    } else {
+                        if (ajaxObject.fail != null){
+                            ajaxObject.fail(xhttp);
+                        }
                     }
                 }
             }
+            catch(error){
+                ajaxObject.fail(error)
+            }  
         };
         
-        if (ajaxObject.beforeSend != null){
-            await  ajaxObject.beforeSend(xhttp).then(() => {
+        if (ajaxObject.beforeSend != null && typeof(ajaxObject.beforeSend) != 'undefined'){
+            await ajaxObject.beforeSend(xhttp)
+            try{
                 xhttp.send(ajaxObject.data);
-            });
+            }
+            catch(error){
+                ajaxObject.fail(error)
+            }
         }
         else{
-            xhttp.send(ajaxObject.data);
+            try{
+                xhttp.send(ajaxObject.data);
+            }
+            catch(error){
+                ajaxObject.fail(error)
+            }
         }
 
         
@@ -266,13 +280,38 @@ var test = __('button').prepend(pElem)*/
 //ajax
 
 
-__().ajax({
-    url:'https://serene-island-81305.herokuapp.com/api/200',
+/*__().ajax({
+    url:'https://serene-island-81305.herokuapp.com/api/400',
     method: 'GET',
+    headers: {'Access-Control-Allow-Origin':'https://serene-island-81305.herokuapp.com/api/2300'},
     success: function(resp){
         console.log(resp.responseText)
     },
     beforeSend: function(whatever){
         console.log("before")
+    },
+    fail: function(error){
+        console.log("fail\n")
+        console.log(error);
+    }
+})*/
+
+
+__().ajax({
+    url:'https://serene-island-81305.herokuapp.com/api/200',
+    method: 'POST',
+    data: {'123':'abc'},
+    headers: {'Access-Control-Allow-Origin':'https://serene-island-81305.herokuapp.com/api/2300'},
+    success: function(resp){
+        console.log(resp.responseText)
+        console.log(resp)
+    },
+    beforeSend: function(whatever){
+        console.log("before")
+    },
+    fail: function(error){
+        console.log("fail")
+        console.log(error);
     }
 })
+

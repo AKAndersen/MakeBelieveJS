@@ -1,3 +1,5 @@
+
+
 __ = (query) => {
     this.query = query;
     return new makeBelieve(document.querySelectorAll(this.query)) 
@@ -150,8 +152,67 @@ class makeBelieve {
     }
 
     // 12. Implement a method which imitates the JQuery ajax method. Parameter is an object which contains the configuration for the HTTP request
-    ajax(URL, Method, Timeout, Data, headers) {
-        //return this;
+    async ajax(ajaxObject) {
+        if (typeof(ajaxObject.url) == 'undefined'){
+            throw new Error('no url provided')
+        }
+        if (typeof(ajaxObject.method) == 'undefined'){
+            ajaxObject.method = 'GET'
+        }
+        if (typeof(ajaxObject.timeout) == 'undefined'){
+            ajaxObject.timeout = 0
+        }
+        if (typeof(ajaxObject.data) == 'undefined'){
+            ajaxObject.data = {}
+        }
+        if (typeof(ajaxObject.headers) == 'undefined'){
+            ajaxObject.headers= []
+        }
+        if (typeof(ajaxObject.success) == 'undefined'){
+            ajaxObject.success = null
+        }
+        if (typeof(ajaxObject.fail) == 'undefined'){
+            ajaxObject.fail = null
+        }
+        if (typeof(ajaxObject.beforeSend) == 'undefined'){
+            ajaxObject.beforeSend = null
+        }
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open(ajaxObject.method,ajaxObject.url)
+
+        for (var i=0;i<ajaxObject.headers.length;i++){
+            xhttp.setRequestHeader(ajaxObject.headers[i][0],ajaxObject.headers[i][1]);
+        }
+
+        xhttp.timeout = ajaxObject.timeout * 1000; //change seconds to milliseconds
+
+        xhttp.ontimeout = ajaxObject.fail;
+        xhttp.onload = function() {
+            if (xhttp.readyState === 4) {
+                if (xhttp.status === 200) {
+                    if (ajaxObject.success != null){
+                        ajaxObject.success(xhttp);
+                    }
+                } else {
+                    if (ajaxObject.fail != null){
+                        ajaxObject.fail.apply(xhttp,ajaxObject.fail.args);
+                    }
+                }
+            }
+        };
+        
+        if (ajaxObject.beforeSend != null){
+            await  ajaxObject.beforeSend(xhttp).then(() => {
+                xhttp.send(ajaxObject.data);
+            });
+        }
+        else{
+            xhttp.send(ajaxObject.data);
+        }
+
+        
+        
         
     }
 
@@ -201,3 +262,17 @@ var test = __('button').prepend(pElem)*/
 
 //delete
 //__('.root').delete();
+
+//ajax
+
+
+__().ajax({
+    url:'https://serene-island-81305.herokuapp.com/api/200',
+    method: 'GET',
+    success: function(resp){
+        console.log(resp.responseText)
+    },
+    beforeSend: function(whatever){
+        console.log("before")
+    }
+})

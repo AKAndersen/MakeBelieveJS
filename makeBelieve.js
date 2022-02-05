@@ -116,10 +116,9 @@ class makeBelieve {
             }
         }
         else{
-            //virkar ekki rétt
-            var element = arguments[0].parentNode 
+            var element = arguments[0];
             for (var i=0;i<this.makeBelieveObject.length;i++){
-                this.makeBelieveObject[i].insertAdjacentElement('beforeend',element)
+                this.makeBelieveObject[i].insertAdjacentElement('beforeend',element.cloneNode(true))
             }
         }
 
@@ -134,10 +133,9 @@ class makeBelieve {
             }
         }
         else{
-            //virkar ekki allveg rétt
-            var element = arguments[0].parentNode 
+            var element = arguments[0];
             for (var i=0;i<this.makeBelieveObject.length;i++){
-                this.makeBelieveObject[i].insertAdjacentElement('afterbegin',element)
+                this.makeBelieveObject[i].insertAdjacentElement('afterbegin',element.cloneNode(true))
             }
         }
         return this
@@ -189,7 +187,7 @@ class makeBelieve {
 
 //append
 //var test = __('form').append('<p>I am an appened paragraph</p>');
-/*var test = __('form').append(
+/*var test = __('button').append(
     document.createElement('p').appendChild(
         document.createTextNode('I am an appended paragraph.')
     )
@@ -197,12 +195,9 @@ class makeBelieve {
 
 //prepend
 //var test = __('form').prepend('<p>I am an prepended paragraph</p>')
-/*var test = __('form').append(
-    document.createElement('p').appendChild(
-        document.createTextNode('I am an prepended paragraph.')
-    ))*/
+/*var pElem = document.createElement('p');
+pElem.appendChild(document.createTextNode('I am an appended paragraph'));
+var test = __('button').prepend(pElem)*/
 
 //delete
-//__('#button').delete();
-
-
+//__('.root').delete();

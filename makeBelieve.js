@@ -96,7 +96,7 @@ class makeBelieve {
     // 7. Implement a click handler. The fallback should have access to the event and should refere to it self.
     onClick(callback){
         for (var i = 0; i < this.makeBelieveObject.length; i++) {
-            this.makeBelieveObject[i].onclick = function(){callback.apply(this, callback.arguments)}
+            this.makeBelieveObject[i].onclick = function(e){callback(e)}
         }
         return this;
     }
@@ -238,17 +238,25 @@ class makeBelieve {
 
     }
     // 14. toggles css clas for an element
-    toggleClass(elem) {
-   
+    toggleClass(classname) {
+        /*for (var i=0;i<this.makeBelieveObject.length;i++){
+            if (this.makeBelieveObject[i].ge)
+        }*/
+        
     }
 
     // 15. Submit hadnler for forms. Should only target forms.
-    onSubmit() {
+    onSubmit(callback) {
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            this.makeBelieveObject[i].onsubmit = function(e){callback(e)};
+        }
     }
 
     // 16. Input handler for input tags.
-    onInput() {
-
+    onInput(callback) {
+        for (var i=0;i<this.makeBelieveObject.length;i++){
+            this.makeBelieveObject[i].addEventListener('change',function(e){callback(e)});
+        }
     }
 
 }
@@ -258,10 +266,10 @@ class makeBelieve {
 //parent
 //__('#password').parent().parent();
 
-//button
-/*var test = new __('button').onClick(function(){
-    console.log(this)
-});*/
+//onclick
+//__('button').onClick(function(e){
+//    console.log(e.type)
+//});
 
 //append
 //var test = __('form').append('<p>I am an appened paragraph</p>');
@@ -317,4 +325,17 @@ __().ajax({
 })*/
 
 //css
-__('button').css('color','red');
+//__('button').css('color','red');
+
+//toggle
+
+//onsubmit
+//__("#test2").onSubmit(function(evt){
+//    console.log(evt)
+//    alert("The form was submitted");
+//})
+
+//inputhandler
+__(".test2").onInput(function(e){
+    console.log(e);
+})
